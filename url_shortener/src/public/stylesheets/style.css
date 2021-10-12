@@ -1,0 +1,41 @@
+:root {
+  --standard-padding: 10px;
+}
+
+/* global tag styles - start */
+
+body {
+  margin: 0;
+  font: 14px Helvetica, Arial, sans-serif;
+}
+
+nav,
+main {
+  padding: var(--standard-padding);
+}
+
+input {
+  padding: var(--standard-padding);
+}
+
+/* global tag styles - end */
+
+/* general classes - start */
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.full-standard-padding {
+  padding: var(--standard-padding);
+}
+
+/* general classes - end */

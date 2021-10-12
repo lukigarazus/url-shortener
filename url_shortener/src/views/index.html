@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Url Shortener</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <h1>Url Shortener</h1>
+    </nav>
+
+    <main>
+      <form class="flex center">
+        <input type="text" placeholder="Your URL" id="url-input" />
+        <button onclick="onShortenClick(event)" type="submit">Shorten</button>
+      </form>
+      <div
+        id="loading-indicator"
+        class="flex center hidden full-standard-padding"
+      >
+        <span>Loading...</span>
+      </div>
+      <div
+        id="error-indicator"
+        class="flex center hidden full-standard-padding"
+      >
+        <span>Error</span>
+      </div>
+      <div id="result" class="hidden">
+        <div class="flex center full-standard-padding">Your shortened url</div>
+        <div id="result__url" class="flex center full-standard-padding"></div>
+      </div>
+    </main>
+  </body>
+  <script src="scripts/index.js"></script>
+</html>

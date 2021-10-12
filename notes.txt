@@ -1,0 +1,18 @@
+Things I omitted due to the evaluative nature of this application and its time constraints:
+1. There should be a "seed" stage when connecting to Redis to populate the filter with Postgres data if there's any
+2. Things like env variables for Postgres or Redis password etc.
+3. Authentication
+4. Rate limiting
+5. Different setups for DEV and PROD, including E2E test that pollutes the main DB
+
+Things to keep in mind:
+1. The capacity for urls depends on the length of the random hash. It can be therefore easily extended.
+2. The random hash will take longer to generate with time and with added urls. Ideally, I would create a separate service that keeps a certain buffer of ready-to-go strings to keep things flowing.
+
+
+My choices:
+1. I started by implementing an all-Postgres solution with cryptographic hashes but quickly realized that it was pretty slow and wasteful. I went with a random string generator as a "hashing" function. The only problem then were
+   duplicates. I could run a Postgres query and check or even perform an INSERT and catch unique column value errors but I needed something faster. Redis Bloom filter may be slower than Redis Sets but it requires less memory
+   and therefore was preferable in this case.
+2. With such a simple UI there was really no need for a fancy (and therefore heavy) UI library or framework.
+3. There was really nothing to unit-test here. I could create a boilerplate-heavy test suite in Node but it would be pretty useless, practically speaking, so I went with a simple E2E test that checks the required throughput.
