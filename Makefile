@@ -7,6 +7,8 @@
 # anything else that needs to happen before your server is started
 # for the first time
 setup:
+	mkdir postgres-data
+	mkdir redis-data
 	chmod +x ./test_throughput.sh
 	chmod +x ./test.sh
 	chmod +x ./run_docker.sh
@@ -21,9 +23,9 @@ setup:
 # an http server process that listens on any unreserved port
 #	of your choice (e.g. 8080). 
 server:
-	sudo ./run_docker_and_server.sh
+	sudo bash ./run_docker_and_server.sh
 
 # `make test` will be used after `make setup` in order to run
 # your test suite.
 test:
-	sudo ./test_throughput.sh
+	sudo bash ./test.sh

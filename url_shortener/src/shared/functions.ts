@@ -1,5 +1,5 @@
 import { CHARACTERS, HASH_LENGTH, REDIS_HASHES } from "./constants";
-import { redisClient } from "./redis";
+import { exists, add } from "./redis";
 
 function makeid(length: number) {
   var result = "";
@@ -17,10 +17,9 @@ function randomString() {
 
 async function hashWithRandomString(_string: string): Promise<string> {
   const hashed = await randomString();
-  if (await redisClient.exists(REDIS_HASHES, hashed))
-    return hashWithRandomString(_string);
+  if (await exists(hashed)) return hashWithRandomString(_string);
   // no need to wait for this
-  redisClient.add(REDIS_HASHES, hashed);
+  add(hashed);
   return hashed;
 }
 
